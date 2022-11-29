@@ -2,7 +2,7 @@
   <van-button round type="danger" custom-class="empty-bottom-button" bind:click="goBackAction">返回</van-button>
 </van-empty>
 <view wx:else>
-  <!-- <ad unit-id="adunit-13861098ed256d2f" ad-type="video" ad-theme="white"></ad> -->
+  <ad unit-id="adunit-e36967df11d68428"></ad>
   <view class="root">
     <view wx:for="{{ record_list }}" data-index="{{ index }}" wx:key="index" hover-class="item-hover" bindtap="showRecordDetailAction" class="record van-hairline--bottom van-multi-ellipsis--l2">
       <view class="title">{{ item.title }}</view>

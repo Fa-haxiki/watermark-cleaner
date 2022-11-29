@@ -4,7 +4,7 @@ const _ = require('lodash')
 const moment = require('moment')
 
 cloud.init({
-  env: 'online-663960',
+  env: 'cloud1-9g0vd87icc6de2bf',
 })
 const db = cloud.database()
 

@@ -34,7 +34,7 @@
     </view>
   </view>
   <view class="banner-ad-area">
-    <ad unit-id="adunit-d92ffc31b6aa6ae4" ad-type="video" ad-theme="white" style="position:relative;z-index:1"></ad>
+    <ad unit-id="adunit-3002b470cfc764d0" ad-type="video" ad-theme="white" style="position:relative;z-index:1"></ad>
   </view>
   <view class="help-area">
     <van-button custom-class="share-btn btn" plain type="default" block open-type="share" size="normal" icon="share">推荐好友</van-button>
