@@ -19,7 +19,7 @@
       <view class="help-content-text">有些作者上传的视频本身就带有水印，这种暂时无法去除。</view>
     </view>
   </van-panel>
-  <ad unit-id="adunit-672a8ac2a19240c4" ad-type="video" ad-theme="white"></ad>
+  <ad unit-id="adunit-3e52fb806b9286f3" ad-type="video" ad-theme="white"></ad>
   <van-panel custom-class="panel" title="🔥 为什么下载失败？">
     <view class="help-content">
       <view style="margin-bottom:5px" class="help-content-text">视频可能超过了50MB，目前微信只支持文件大小为50MB以内的视频下载</view>
