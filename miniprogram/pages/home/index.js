@@ -220,8 +220,8 @@ Page({
     wx.getClipboardData({
       success: (option) => {
         wx.hideToast()
-        const index = option.data.indexOf('https://')
-        if (option.data.length <= 0 || index < 0) {
+        const hasLink = option.data.includes("https://") || option.data.includes("http://")
+        if (option.data.length <= 0 || !hasLink) {
           Dialog.alert({
             title: '提示',
             message: '粘贴板没有视频分享链接，请先复制链接',
@@ -272,8 +272,8 @@ Page({
   removeWaterMark: function () {
     const { link_url } = this.data
     if (link_url.length <= 0) return Toast('需要粘贴链接地址！')
-    const index = link_url.indexOf('https://')
-    if (index < 0) return Toast('分享地址不太对哦')
+    const valid_link = link_url.includes('https://') || link_url.includes('http://')
+    if (!valid_link) return Toast('分享地址不太对哦')
     Toast.loading({ mask: true, message: '解析中...', duration: 8000 })
     wx.cloud
       .callFunction({ name: 'remove_watermark_v3', data: { link_url } })
