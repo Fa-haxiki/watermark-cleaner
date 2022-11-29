@@ -16,9 +16,8 @@
             </view>
             <view bind:tap="goSee" class="option" data-index="{{index}}">去看看</view>
         </view>
-        <ad-custom unit-id="adunit-51e0ba6b4460ab86"></ad-custom>
         <view class="center-ad" >
-            <!-- <ad unit-id="adunit-3d9f20a0ce851ed0" ad-type="video" ad-theme="white"></ad> -->
+            <ad unit-id="adunit-2bef410ffa654a83"></ad>
         </view>
     </view>
 </view>

@@ -1,6 +1,3 @@
-<view class="banner-ad-area">
-  <ad-custom unit-id="adunit-51e0ba6b4460ab86"></ad-custom>
-</view>
 <view class="container">
   <block wx:for="{{redbag_list}}" wx:key="_id">
     <view class="redbag-item" bindtap="getRedbag" data-appid="{{ item.mini_app.appid }}" data-path="{{ item.mini_app.path }}">

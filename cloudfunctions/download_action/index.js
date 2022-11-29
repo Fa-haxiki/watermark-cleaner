@@ -13,11 +13,11 @@ exports.main = async (event, context) => {
   const cloud_path = `package_watermark/${today}/${openid}/${moment().unix()}.mp4`;
   const upload_res = await uploadFile(cloud_path, file_url);
   console.log('upload_res', upload_res);
-    const { fileID, statusCode, errMsg } = upload_res;
-    if (errMsg !== 'uploadFile:ok') {
-      return { code: -1, msg: '网络一场，请重试' };
-    }
-    const result = { openid, download_url: fileID };
+  const { fileID, statusCode, errMsg } = upload_res;
+  if (errMsg !== 'uploadFile:ok') {
+    return { code: -1, msg: '网络异常，请重试' };
+  }
+  const result = { openid, download_url: fileID };
   return result;
 }
 

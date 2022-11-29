@@ -157,8 +157,8 @@ module.exports = {
    */
   cloudDownloadFile: function (fileID, progress_cb) {
     const promise = new Promise((resolve, reject) => {
-      wx.downloadFile({
-        url: fileID,
+      wx.cloud.downloadFile({
+        fileID,
         success: function (res) {
           resolve(res)
         },

@@ -39,6 +39,64 @@ Page({
     ],
   },
 
+  startDownLoad: function() {
+    const that = this
+    that.setData({ show_videoAd: false, show_ad_popup: 0 }, () => {
+      wx.showToast({ title: '看广告成功' })
+    })
+    const { video_url } = this.data
+    console.log('save video', video_url)
+    Utils.authorize('scope.writePhotosAlbum')
+      .then((result) => {
+        const { errMsg } = result
+        if (errMsg !== 'authorize:ok') throw Error(errMsg)
+        this.setData({ downloading: true, download_progress: 0 })
+        return wx.cloud.callFunction({
+          name: 'download_action',
+          data: { file_url: video_url },
+        })
+      })
+      .then((result) => {
+        return Utils.cloudDownloadFile(result.result.download_url, (obj) => {
+          this.setData({ download_progress: obj.progress })
+        })
+      })
+      .then((res) => {
+        this.setData({ 
+          show_action_sheet: true, 
+          downloading: false,
+          tempFilePath: res.tempFilePath,
+        })
+        return Utils.saveVideoToPhotosAlbum(res.tempFilePath)
+      })
+      .catch((error) => {
+        const { errMsg } = error
+        if ((errMsg || '').startsWith('authorize:fail')) {
+          Dialog.confirm({
+            title: '提示',
+            message: '保存失败，请授权「相册」后重新保存',
+            showCancelButton: true,
+            confirmButtonText: '去授权',
+            confirmButtonOpenType: 'openSetting',
+          })
+        } else {
+          Dialog.confirm({
+            title: '提示',
+            message: '下载失败，请重试',
+            confirmButtonText: '重试',
+          })
+            .then((res) => {
+              this.saveVideoAction()
+            })
+            .catch(() => {
+              console.log('取消')
+            })
+        }
+        this.setData({ downloading: false })
+        console.error(error.errMsg)
+      })
+  },
+
   /**
    * 初始化激励视频广告
    * @param {*} adUnitId 广告位 id
@@ -52,63 +110,7 @@ Page({
     videoAd.onClose((res) => {
       const { isEnded } = res
       if (isEnded) {
-        that.setData({ show_videoAd: false, show_ad_popup: 0 }, () => {
-          wx.showToast({ title: '看广告成功' })
-        })
-        const { show_videoAd, video_url } = this.data
-        console.log('save video', video_url)
-        Utils.authorize('scope.writePhotosAlbum')
-          .then((result) => {
-            const { errMsg } = result
-            if (errMsg !== 'authorize:ok') throw Error(errMsg)
-            // 获取下载链接
-            this.setData({ downloading: true, download_progress: 0 })
-            // return wx.cloud.callFunction({
-            //   name: 'download_action',
-            //   data: { file_url: video_url },
-            // })
-            // 下载视频
-            return Utils.cloudDownloadFile(video_url, (obj) => {
-              this.setData({ download_progress: obj.progress })
-            })
-          })
-          .then((result) => {
-            console.log('下载', result)
-            this.setData({
-              downloading: false,
-              tempFilePath: result.tempFilePath,
-            })
-            return Utils.saveVideoToPhotosAlbum(result.tempFilePath)
-          })
-          .then(() => {
-            this.setData({ show_action_sheet: true })
-          })
-          .catch((error) => {
-            const { errMsg } = error
-            if ((errMsg || '').startsWith('authorize:fail')) {
-              Dialog.confirm({
-                title: '提示',
-                message: '保存失败，请授权「相册」后重新保存',
-                showCancelButton: true,
-                confirmButtonText: '去授权',
-                confirmButtonOpenType: 'openSetting',
-              })
-            } else {
-              Dialog.confirm({
-                title: '提示',
-                message: '下载失败，请重试',
-                confirmButtonText: '重试',
-              })
-                .then((res) => {
-                  this.saveVideoAction()
-                })
-                .catch(() => {
-                  console.log('取消')
-                })
-            }
-            this.setData({ downloading: false })
-            console.error(error.errMsg)
-          })
+        that.startDownLoad()
       } else {
         wx.showModal({
           title: '失败',
