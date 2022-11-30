@@ -4,11 +4,6 @@
       <view class="help-content-text">该小程序永久免费，支持所有平台短视频。</view>
     </view>
   </van-panel>
-  <van-panel custom-class="panel" title="🔥 有没工具网页版？">
-    <view class="help-content">
-      <view class="help-content-text">有，请关注公众号：每日互联网关注，回复：1。</view>
-    </view>
-  </van-panel>
   <van-panel custom-class="panel" title="🔥 为什么转发不了视频？">
     <view class="help-content">
       <view class="help-content-text">视频需保存后才能转发。</view>
@@ -24,7 +19,6 @@
     <view class="help-content">
       <view style="margin-bottom:5px" class="help-content-text">视频可能超过了50MB，目前微信只支持文件大小为50MB以内的视频下载</view>
       <view style="margin-bottom:5px" class="help-content-text">这种情况可以点击【复制视频链接】按钮，然后到浏览器中下载。</view>
-      <view class="help-content-text">安卓手机建议使用 QQ 浏览器，苹果手机需要下载软件【documents】才能在浏览器中进行下载视频。</view>
     </view>
   </van-panel>
   <van-panel custom-class="panel" title="🔥 为什么会解析失败？">
