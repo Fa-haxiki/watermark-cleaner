@@ -22,10 +22,11 @@ exports.main = async (event, context) => {
   const options2 = {
     ...options1,
     params: {
-      token: "uuic-qackd-fga-test",
-      link,
+      uid: "1661769090",
+      my: "bcfgjklnvxzEFMNW15",
+      url: link,
     },
-    url: 'https://analyse.layzz.cn/lyz/getAnalyse',
+    url: 'https://api.ciyer.com/api/dsp/',
   };
   let options;
   if (isXhsLink) {
@@ -38,10 +39,10 @@ exports.main = async (event, context) => {
   if (isXhsLink) {
     return {
       code: 200,
-      url: result.data.data.playAddr,
-      music: '',
-      title: result.data.data.desc,
-      cover: result.data.cover,
+      url: result.data.data.url,
+      music: result.data.data.mp3,
+      title: result.data.data.title,
+      cover: result.data.data.cover,
     };
   } else {
     return {
